@@ -1,5 +1,5 @@
 // Typing effect
-const text = "Welcome To David Cyril Official Website";
+const text = "🥷 Welcome to COBU-TECH Premium VIP Members Only 🔐";
 let index = 0;
 const typingSpeed = 100;
 
