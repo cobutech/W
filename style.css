@@ -1,11 +1,17 @@
-/* General */
+/* Force full height layout */
+html, body {
+  height: 100%;
+}
+
 body {
-  margin: 0;
   font-family: 'Poppins', sans-serif;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
   color: white;
 }
 
-/* Unique backgrounds for each page */
+/* Backgrounds per page */
 .home-bg {
   background: url('https://files.catbox.moe/68ec80.jpg') no-repeat center center/cover;
 }
@@ -28,12 +34,18 @@ header {
   text-shadow: 0 0 10px #6e00ff;
 }
 
-/* Welcome Section */
+/* Main Section (Homepage) */
 .welcome-section {
+  flex: 1;
   text-align: center;
   padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Profile Picture */
 .profile-pic {
   width: 120px;
   height: 120px;
@@ -44,6 +56,7 @@ header {
   margin-bottom: 1.5rem;
 }
 
+/* Typing Text */
 .welcome-section h1 {
   font-size: 2.2rem;
   text-shadow: 0 0 15px #c2bfff, 0 0 20px #9f00ff;
@@ -89,7 +102,54 @@ header {
   background: linear-gradient(90deg, #9f00ff, #6e00ff);
 }
 
-/* Forms (Sign In / Log In Pages) */
+/* Contact Section */
+.contact-section {
+  margin-top: 4rem;
+  padding: 2rem;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-top: 1px solid #fff3;
+}
+
+.contact-section h2,
+.contact-section h3 {
+  margin-bottom: 1rem;
+  color: #fff;
+  text-shadow: 0 0 5px #9f00ff;
+}
+
+.social-links, .channel-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.social-links a, .channel-links a {
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  background: linear-gradient(90deg, #6e00ff, #9f00ff);
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s;
+  font-weight: bold;
+}
+
+.social-links a:hover, .channel-links a:hover {
+  background: linear-gradient(90deg, #9f00ff, #6e00ff);
+}
+
+/* Footer */
+.footer {
+  position: fixed;
+  bottom: 10px;
+  left: 15px;
+  color: #ccc;
+  font-size: 0.85rem;
+}
+
+/* Forms (signup & login pages) */
 .form-section {
   padding: 3rem 2rem;
   max-width: 500px;
@@ -139,12 +199,3 @@ header {
 .form button:hover {
   background: linear-gradient(90deg, #9f00ff, #6e00ff);
 }
-
-/* Footer */
-.footer {
-  position: fixed;
-  bottom: 10px;
-  left: 15px;
-  color: #ccc;
-  font-size: 0.85rem;
-  }
