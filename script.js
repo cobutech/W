@@ -1,4 +1,4 @@
-const text = "🥷 Welcome to COBU-TECH Premium VIP Access Portal 🔐";
+const text = "🥷 Welcome to COBU-TECH Premium VIP Portal 🔐";
 const typingElement = document.getElementById('typing-text');
 let index = 0;
 const typingSpeed = 100;
@@ -19,8 +19,3 @@ function typeText() {
 }
 
 window.onload = typeText;
-
-const themeToggle = document.querySelector('.theme-toggle');
-themeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('light-mode');
-});
