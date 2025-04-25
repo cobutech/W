@@ -1,77 +1,40 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
+  margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: url('images/https://files.catbox.moe/68ec80.jpg') no-repeat center center/cover;
-  min-height: 100vh;
   color: white;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  z-index: 0;
-  overflow-x: hidden;
-  animation: zoomBG 20s ease-in-out infinite alternate;
 }
 
-@keyframes zoomBG {
-  from {
-    background-size: 100%;
-  }
-  to {
-    background-size: 110%;
-  }
+.home-bg {
+  background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
 }
 
-body::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: -1;
+.signup-bg {
+  background: linear-gradient(to right, #1d976c, #93f9b9);
+  color: #fff;
+}
+
+.login-bg {
+  background: linear-gradient(to right, #ff4b1f, #1fddff);
+  color: #fff;
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 2rem;
-}
-
-.logo {
-  font-size: 1.5rem;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  color: #c2bfff;
-  text-shadow: 0 0 10px #c2bfff;
-}
-
-.theme-toggle {
-  background: linear-gradient(135deg, #6e00ff, #9f00ff);
-  border: none;
-  border-radius: 50%;
-  padding: 10px;
-  cursor: pointer;
-  font-size: 1.2rem;
+  color: #fff;
+  text-shadow: 0 0 10px #6e00ff;
 }
 
 .welcome-section {
-  flex: 1;
   text-align: center;
   padding: 4rem 2rem;
 }
 
 .welcome-section h1 {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 10px #c2bfff, 0 0 20px #9f00ff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-shadow: 0 0 15px #c2bfff, 0 0 20px #9f00ff;
 }
 
 .cursor {
@@ -87,7 +50,7 @@ header {
 
 .welcome-section p {
   font-size: 1.2rem;
-  margin-bottom: 2rem;
+  margin: 1rem 0 2rem;
 }
 
 .btn-group {
@@ -98,15 +61,14 @@ header {
 }
 
 .btn {
-  padding: 0.75rem 2rem;
-  font-size: 1.1rem;
-  color: white;
-  background: linear-gradient(90deg, #6e00ff, #9f00ff);
-  border: none;
+  padding: 0.8rem 2rem;
   border-radius: 30px;
+  background: linear-gradient(90deg, #6e00ff, #9f00ff);
+  color: white;
   text-decoration: none;
+  font-size: 1rem;
   box-shadow: 0 0 10px #6e00ff;
-  transition: background 0.3s;
+  transition: 0.3s;
 }
 
 .btn:hover {
@@ -114,16 +76,15 @@ header {
 }
 
 .form-section {
-  background-color: rgba(0, 0, 0, 0.6);
   padding: 3rem 2rem;
+  max-width: 500px;
+  margin: 0 auto;
   text-align: center;
-  color: white;
 }
 
 .form-section h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  text-shadow: 0 0 10px #6e00ff;
 }
 
 .form-section p {
@@ -131,13 +92,11 @@ header {
 }
 
 .form-section a {
-  color: #c2bfff;
+  color: #fff;
   text-decoration: underline;
 }
 
 .form {
-  max-width: 400px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -145,18 +104,18 @@ header {
 
 .form input {
   padding: 0.8rem;
-  font-size: 1rem;
   border-radius: 8px;
   border: none;
+  font-size: 1rem;
   text-align: center;
 }
 
 .form button {
   padding: 0.8rem;
-  font-size: 1.1rem;
   background: linear-gradient(90deg, #6e00ff, #9f00ff);
-  color: white;
   border: none;
+  color: white;
+  font-size: 1.1rem;
   border-radius: 30px;
   cursor: pointer;
   transition: 0.3s;
