@@ -3,61 +3,71 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to COBU-TECH VIP Portal</title>
+  <title>COBU-TECH | Log In</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body class="home-bg">
 
-  <!-- TOP HEADER -->
-  <header>
-    <div class="logo">COBU-TECH</div>
-  </header>
+  <section class="form-section">
+    <h2>Log In</h2>
+    <p>Access your VIP account</p>
 
-  <!-- MAIN CONTENT -->
-  <main class="welcome-section">
+    <form class="form" id="login-form">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Log In</button>
+    </form>
 
-    <!-- Profile Picture Centered -->
-    <img src="yourprofile.jpg" alt="Profile" class="profile-pic">
+    <p id="login-msg"></p>
+  </section>
 
-    <!-- Typing Animation Text -->
-    <h1><span id="typing-text"></span><span class="cursor">|</span></h1>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword
+    } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
 
-    <!-- Welcome Word -->
-    <h2>Welcome to COBU-TECH Premium VIP Portal</h2>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCjfVsanS_CWWSqj2Jus5mJ_PM4I7LV-cQ",
+      authDomain: "cobu-tech-portal-676bc.firebaseapp.com",
+      projectId: "cobu-tech-portal-676bc",
+      storageBucket: "cobu-tech-portal-676bc.appspot.com",
+      messagingSenderId: "287491864786",
+      appId: "1:287491864786:web:7695c37bdc1fdaef22d50b",
+      measurementId: "G-7H9TP8LEWF"
+    };
 
-    <!-- Buttons -->
-    <div class="btn-group">
-      <a href="signup.html" class="btn">Sign In</a>
-      <a href="login.html" class="btn">Log In</a>
-    </div>
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-    <!-- Contact Support Section -->
-    <section class="contact-section">
-      <h2>Connect With COBU-TECH</h2>
-      <div class="social-links">
-        <a href="#">Telegram</a>
-        <a href="#">WhatsApp</a>
-        <a href="#">Phone Call</a>
-        <a href="#">Facebook</a>
-        <a href="#">Instagram</a>
-      </div>
+    document.getElementById("login-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const msg = document.getElementById("login-msg");
 
-      <h3>Join Our Channels</h3>
-      <div class="channel-links">
-        <a href="#">Join WhatsApp Channel</a>
-        <a href="#">Join Telegram Channel</a>
-      </div>
-    </section>
+      try {
+        const userCred = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCred.user;
 
-  </main>
+        if (!user.emailVerified) {
+          msg.innerHTML = "Please verify your email before logging in.";
+          msg.style.color = "orange";
+          return;
+        }
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    © COBU-TECH | Premium Access 2024–2029
-  </footer>
+        msg.innerHTML = "Login successful!";
+        msg.style.color = "lightgreen";
+        setTimeout(() => {
+          window.location.href = "dashboard.html"; // Optional next step
+        }, 2000);
 
-  <script src="script.js"></script>
-
+      } catch (error) {
+        msg.innerHTML = "Error: " + error.message;
+        msg.style.color = "red";
+      }
+    });
+  </script>
 </body>
 </html>
