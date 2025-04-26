@@ -5,29 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>COBU-TECH | Sign Up</title>
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Firebase SDKs always go first!! -->
-  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js"></script>
-
-  <script>
-    // Firebase Config and Init
-    const firebaseConfig = {
-      apiKey: "AIzaSyCjfVsanS_CWWSqj2Jus5mJ_PM4I7LV-cQ",
-      authDomain: "cobu-tech-portal-676bc.firebaseapp.com",
-      projectId: "cobu-tech-portal-676bc",
-      storageBucket: "cobu-tech-portal-676bc.appspot.com",
-      messagingSenderId: "287491864786",
-      appId: "1:287491864786:web:7695c37bdc1fdaef22d50b",
-      measurementId: "G-7H9TP8LEWF"
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-  </script>
 </head>
 
 <body class="signup-bg">
@@ -45,8 +22,26 @@
     <p id="signup-msg"></p>
   </section>
 
-  <!-- Signup Script (now Firebase is ready!) -->
-  <script>
+  <!-- Signup Script using Firebase Modular SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCjfVsanS_CWWSqj2Jus5mJ_PM4I7LV-cQ",
+      authDomain: "cobu-tech-portal-676bc.firebaseapp.com",
+      projectId: "cobu-tech-portal-676bc",
+      storageBucket: "cobu-tech-portal-676bc.appspot.com",
+      messagingSenderId: "287491864786",
+      appId: "1:287491864786:web:7695c37bdc1fdaef22d50b",
+      measurementId: "G-7H9TP8LEWF"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
     document.getElementById("signup-form").addEventListener("submit", async function (e) {
       e.preventDefault();
       const name = document.getElementById("full-name").value;
@@ -55,15 +50,15 @@
       const msg = document.getElementById("signup-msg");
 
       try {
-        const userCred = await auth.createUserWithEmailAndPassword(email, password);
+        const userCred = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCred.user;
 
-        await user.sendEmailVerification();
+        await sendEmailVerification(user);
 
-        await db.collection("users").doc(user.uid).set({
-          name: name,
-          email: email,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        await setDoc(doc(db, "users", user.uid), {
+          name,
+          email,
+          createdAt: serverTimestamp()
         });
 
         msg.innerHTML = "Signup successful! Check your email to verify your account.";
