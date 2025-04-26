@@ -26,13 +26,13 @@
   <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js"></script>
 
-  <!-- Firebase Config and Init -->
+  <!-- Firebase Config & Init -->
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyCjfVsanS_CWWSqj2Jus5mJ_PM4I7LV-cQ",
       authDomain: "cobu-tech-portal-676bc.firebaseapp.com",
       projectId: "cobu-tech-portal-676bc",
-      storageBucket: "cobu-tech-portal-676bc.firebasestorage.app",
+      storageBucket: "cobu-tech-portal-676bc.appspot.com",
       messagingSenderId: "287491864786",
       appId: "1:287491864786:web:7695c37bdc1fdaef22d50b",
       measurementId: "G-7H9TP8LEWF"
@@ -48,24 +48,28 @@
   <script>
     document.getElementById("signup-form").addEventListener("submit", async function (e) {
       e.preventDefault();
+
       const name = document.getElementById("full-name").value;
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
       const msg = document.getElementById("signup-msg");
 
       try {
+        // Create user account
         const userCred = await auth.createUserWithEmailAndPassword(email, password);
         const user = userCred.user;
 
+        // Send verification email
         await user.sendEmailVerification();
 
+        // Store user info in Firestore
         await db.collection("users").doc(user.uid).set({
           name: name,
           email: email,
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
 
-        msg.innerHTML = "Signup successful! Please check your email to verify your account.";
+        msg.innerHTML = "Signup successful! Check your email to verify your account.";
         msg.style.color = "lightgreen";
       } catch (error) {
         msg.innerHTML = "Error: " + error.message;
