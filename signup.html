@@ -3,19 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎 𝐂𝐎𝐁𝐔-𝐓𝐄𝐂𝐇</title>
+  <title>COBU-TECH | Sign Up</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="signup-bg">
   <section class="form-section">
-    <h2>𝐁𝐄 𝐀 𝐌𝐄𝐌𝐁𝐄𝐑</h2>
-    <p>𝐀𝐥𝐫𝐞𝐚𝐝𝐲 𝐡𝐚𝐯𝐞 𝐚𝐧 𝐚𝐜𝐜𝐨𝐮𝐧𝐭? <a href="login.html">𝐂𝐋𝐈𝐂𝐊 𝐇𝐄𝐑𝐄</a>.</p>
-    <form class="form">
-      <input type="text" placeholder="Full Name" required />
-      <input type="email" placeholder="Email" required />
-      <input type="password" placeholder="Create Password" required />
-      <button type="submit">𝐖𝐄𝐋𝐂𝐎𝐌𝐄</button>
+    <h2>Sign Up</h2>
+    <p>Create your COBU-TECH account</p>
+
+    <form class="form" id="signup-form">
+      <input type="text" id="full-name" placeholder="Full Name" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Sign Up</button>
     </form>
+
+    <p id="signup-msg"></p>
   </section>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCjfVsanS_CWWSqj2Jus5mJ_PM4I7LV-cQ",
+      authDomain: "cobu-tech-portal-676bc.firebaseapp.com",
+      projectId: "cobu-tech-portal-676bc",
+      storageBucket: "cobu-tech-portal-676bc.firebasestorage.app",
+      messagingSenderId: "287491864786",
+      appId: "1:287491864786:web:7695c37bdc1fdaef22d50b",
+      measurementId: "G-7H9TP8LEWF"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+  </script>
+
+  <script>
+    document.getElementById("signup-form").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const name = document.getElementById("full-name").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const msg = document.getElementById("signup-msg");
+
+      try {
+        const userCred = await auth.createUserWithEmailAndPassword(email, password);
+        const user = userCred.user;
+
+        await user.sendEmailVerification();
+
+        await db.collection("users").doc(user.uid).set({
+          name: name,
+          email: email,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        msg.innerHTML = "Signup successful! Please check your email to verify your account.";
+      } catch (error) {
+        msg.innerHTML = "Error: " + error.message;
+      }
+    });
+  </script>
 </body>
 </html>
