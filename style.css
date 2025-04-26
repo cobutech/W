@@ -1,4 +1,4 @@
-/* Full height */
+/* Reset and full screen */
 html, body {
   margin: 0;
   padding: 0;
@@ -7,7 +7,7 @@ html, body {
   color: white;
 }
 
-/* Rainbow Animated Background */
+/* Rainbow animated background */
 .home-bg {
   min-height: 100vh;
   display: flex;
@@ -16,29 +16,27 @@ html, body {
   background-size: 400% 400%;
 }
 
-/* Rainbow keyframes */
 @keyframes rainbowBackground {
-  0% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-    background-position: 0% 50%;
-  }
-  50% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-    background-position: 100% 50%;
-  }
-  100% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-    background-position: 0% 50%;
-  }
+  0% { background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet); background-position: 0% 50%; }
+  50% { background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet); background-position: 100% 50%; }
+  100% { background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet); background-position: 0% 50%; }
 }
 
-/* Logo */
-header .logo {
+/* Top Logo */
+header {
+  width: 100%;
   padding: 1rem;
-  font-size: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: left;
+}
+
+.logo {
+  font-size: 1.8rem;
   font-weight: bold;
-  text-align: center;
-  text-shadow: 0 0 10px #ffffff, 0 0 20px #ff00ff;
+  margin-left: 1rem;
+  text-shadow: 0 0 10px #fff, 0 0 20px #9f00ff;
 }
 
 /* Main welcome section */
@@ -47,14 +45,49 @@ header .logo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
+  margin-top: 5rem;
+  padding: 2rem 1rem;
   text-align: center;
-  padding: 2rem;
 }
 
-/* Buttons group */
+/* Profile picture */
+.profile-pic {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  box-shadow: 0 0 15px #ff00ff;
+  margin-bottom: 1rem;
+}
+
+/* Typing Text */
+h1 {
+  font-size: 1.,2rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 5px #fff, 0 0 10px #9f00ff;
+}
+
+.cursor {
+  font-weight: bold;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Welcome text */
+h2 {
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
 .btn-group {
-  margin-top: 2rem;
+  margin-top: 1rem;
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
@@ -65,39 +98,37 @@ header .logo {
   border-radius: 30px;
   background: linear-gradient(90deg, #ff00ff, #6e00ff);
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-decoration: none;
-  box-shadow: 0 0 15px #ff00ff;
-  transition: 0.4s;
+  box-shadow: 0 0 10px #ff00ff;
+  transition: background 0.3s;
 }
 
 .btn:hover {
   background: linear-gradient(90deg, #6e00ff, #ff00ff);
-  box-shadow: 0 0 20px #ffffff;
 }
 
 /* Contact Section */
 .contact-section {
   margin-top: 3rem;
+  width: 100%;
   padding: 2rem;
-  text-align: center;
   background-color: rgba(0, 0, 0, 0.6);
   border-top: 2px solid #ffffff44;
   border-bottom: 2px solid #ffffff44;
+  border-radius: 20px;
 }
 
-.contact-section h2,
-.contact-section h3 {
+.contact-section h2, .contact-section h3 {
   margin-bottom: 1rem;
-  font-size: 1.5rem;
-  text-shadow: 0 0 5px #fff, 0 0 10px #9f00ff;
+  text-shadow: 0 0 5px #fff;
 }
 
 .social-links, .channel-links {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.8rem;
   margin-bottom: 1.5rem;
 }
 
@@ -108,7 +139,6 @@ header .logo {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  transition: 0.3s;
 }
 
 .social-links a:hover, .channel-links a:hover {
@@ -118,7 +148,7 @@ header .logo {
 /* Footer */
 .footer {
   text-align: center;
-  padding: 1rem;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #ddd;
-}
+  padding: 1rem;
+  }
